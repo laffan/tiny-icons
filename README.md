@@ -99,7 +99,9 @@ To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders a
   - bone: two overlapping knob circles at each end
   - worm: concentric arcs with r = 1.25 and 3.25 around the same centres
   - snail: semicircles whose radius grows by 1 each half-turn, with the last quarter-turn landing exactly on the foot line so the shell sits on the body
-  - pineapple, sun: crosshatch chords and ray endpoints computed from the ellipse/circle equations
+  - pineapple, sun, sea urchin: crosshatch chords and ray endpoints computed from the ellipse/circle equations
+  - nautilus: a logarithmic spiral sampled every 30° and smoothed (Catmull-Rom to cubic Béziers)
+  - horseshoe crab, bellows: drawn on a local axis, then rotated 45° so a long body fits the diagonal
   - A short Python or JS snippet is enough to find circle intersections.
 - **Arc flags:** SVG's y-axis points down, so `sweep-flag=1` means clockwise on screen. If an arc bulges the wrong way, flip the sweep flag. If it takes the long way round, flip the large-arc flag.
 - **Be careful with round caps near the edge.** A cap extends 0.5 past the endpoint, so a stroke ending at `y=1` paints up to `0.5`.
@@ -123,7 +125,19 @@ To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders a
 | Antler read as a twig | Single antler | A **pair** of antlers |
 | Worm was muddy at 15 px | Diagonal tube | Horizontal S-curve built from concentric arcs, with a band line near the head |
 | Pineapple and igloo turned into grey blobs | Dense crosshatch or brick courses spaced under 2 units | Two crosshatch lines per direction, **4 units** apart; one brick course with two joints |
-| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor | — (don't re-add them without asking) |
+| Tree read as a cloud, then a lollipop | Three-bump cloud canopy with a branch inside; then an oval on a single-line stick | A smooth canopy with a **flattened base** and a 2-unit **outlined trunk** on a ground line |
+| Pineapple read as a firework or an egg wearing a crown | Round body with five splayed leaves; then a zigzag crown | **Taller oval** body and three upright leaves |
+| Rocket window read as a door | Circle in the fuselage | No window: body, fins and exhaust are enough |
+| Hourglass didn't read as an hourglass | Curves meeting in an X | **Rounded bulbs** that stay wide, then pinch to a narrow waist, plus sand at the top and bottom |
+| Key bow and blade looked like separate parts | Circle placed next to the blade | One outline: the blade lines start where they **meet the circle**, and the arc closes the bow |
+| Astrolabe read as a "no entry" sign | Circle crossed by a diagonal rule | An offset inner ring, a centre dot and edge ticks; **avoid a single diagonal across a circle** |
+| Tumbleweed drew a pentagram | Star-polygon scribble (even angle steps) | Circle plus three irregular strands. **Check every scribble for accidental symbols** |
+| Sextant read as a party hat | Bare 60° sector | An inner bracing arc, an index arm that overshoots the scale, and a telescope |
+| Jawbone read as a bathtub or ruler | Rectilinear L shape | One curved band with a condyle knob and short teeth |
+| Torus read as lips at 15 px | Crossing smile and frown arcs | Outer ellipse, a small inner ellipse and one lower shading arc |
+| Eclipse sun arc went the wrong way | Hand-picked SVG arc flags | **Sample** the sun circle and keep only the points outside the moon |
+| Monocle read as a magnifying glass | Single ring with a solid chain line | A double ring and a **dotted** chain made from `h0` dots |
+| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb | — (don't re-add them without asking) |
 
 If an icon fails review twice, look at how established icon sets draw the same object. The `@iconify-json/*` packages on npm are an easy source of reference silhouettes. Use them only to understand the shape, and draw your own version on this grid.
 
