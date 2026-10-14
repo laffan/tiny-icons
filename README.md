@@ -137,7 +137,16 @@ To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders a
 | Torus read as lips at 15 px | Crossing smile and frown arcs | Outer ellipse, a small inner ellipse and one lower shading arc |
 | Eclipse sun arc went the wrong way | Hand-picked SVG arc flags | **Sample** the sun circle and keep only the points outside the moon |
 | Monocle read as a magnifying glass | Single ring with a solid chain line | A double ring and a **dotted** chain made from `h0` dots |
-| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb | — (don't re-add them without asking) |
+| Snail shell still looked detached | Spiral that only touched the foot at one tangent point | Give the snail a **2-unit foot**: the last whorl rests on the foot's top edge and the shell's back drops straight down onto it |
+| Wagon read as a shopping cart | Open box on wheels with a long handle | **Covered wagon**: an arched canvas bonnet with hoop lines over two wheels |
+| Tumbleweed was too geometric, then drew stars | Circle with neat strands; even-step scribbles (pentagrams) | A seeded random closed scribble with uneven angle steps (115–165°) and radii, about 8 points. Look at several seeds and reject any that read as a star |
+| Dolmen read as a Greek temple | Rectangular uprights (four parallel verticals) | **Irregular, rounded** stones and a tilted capstone |
+| Stirrup read as a bell | Dome-shaped arch | **Straight sides** narrowing to a small rounded top, a flat tread and a strap slot |
+| Wasp nest read as an Easter egg | Egg with regular wavy or scalloped bands | An **asymmetric** nest with uneven bands that stop short, and an entrance hole off to one side |
+| Mandrake read as an insect | Thin antenna-like leaves, six limbs and eye dots | **Broad leaves**, a turnip-like body with legs, short drooping arms and no face |
+| Pine cone read as an Easter egg | Zigzag rows | **Curved crosshatch** on a shape that tapers to a point at the bottom |
+| Coral read as a molecule diagram | Single strokes with circles on the tips | One outlined shape of **2-unit-wide fingers** with rounded tips |
+| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb, crucible, pitcher-plant, seed-pod, shell, sundial, spindle | — (don't re-add them without asking) |
 
 If an icon fails review twice, look at how established icon sets draw the same object. The `@iconify-json/*` packages on npm are an easy source of reference silhouettes. Use them only to understand the shape, and draw your own version on this grid.
 
