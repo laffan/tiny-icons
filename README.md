@@ -146,7 +146,13 @@ To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders a
 | Mandrake read as an insect | Thin antenna-like leaves, six limbs and eye dots | **Broad leaves**, a turnip-like body with legs, short drooping arms and no face |
 | Pine cone read as an Easter egg | Zigzag rows | **Curved crosshatch** on a shape that tapers to a point at the bottom |
 | Coral read as a molecule diagram | Single strokes with circles on the tips | One outlined shape of **2-unit-wide fingers** with rounded tips |
-| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb, crucible, pitcher-plant, seed-pod, shell, sundial, spindle | — (don't re-add them without asking) |
+| Hourglass top sand didn't read as sand | A single flat line | A **sunken (crater) surface** in the top bulb and two falling-sand dots below the waist |
+| Ingot looked flat | Two stacked trapezoids | A 3/4 view: front, top and side faces drawn with one oblique depth vector |
+| Igloo was too squat and the bricks were unclear | Low dome with scattered joints | A taller half-ellipse (rx 6, ry 8), three courses and **staggered** joints |
+| Nest looked geometric | A smooth bowl with two crossing lines | Overlapping straight **sticks** at different angles, with ends poking past the outline |
+| Caltrop was too thin, then read as a plane or arrowhead | Thin spikes; a star polygon | Four wide cones that **overlap** at the centre |
+| Accidental symbols | Triangle plus circle (an eye of providence); crossbars on masts (crucifixes); a cloud on a tower (mushroom cloud) | Check every new icon for unintended symbols, and change the motif if one appears |
+| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb, crucible, pitcher-plant, seed-pod, shell, sundial, spindle, bagpipe, barnacle, retort-flask, bullroarer, ocarina, shoe | — (don't re-add them without asking) |
 
 If an icon fails review twice, look at how established icon sets draw the same object. The `@iconify-json/*` packages on npm are an easy source of reference silhouettes. Use them only to understand the shape, and draw your own version on this grid.
 
