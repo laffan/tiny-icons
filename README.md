@@ -44,7 +44,7 @@ npx playwright install chromium   # one-time, if Chromium isn't already availabl
 
 npm run render                    # regenerate preview.png  (--scale 1 for true 1x pixels)
 npm run check                     # lint all icons; exits 1 on errors
-npm run inspect -- moon bell      # write inspect.png for the named icons (all if none given)
+npm run inspect -- moon key       # write inspect.png for the named icons (all if none given)
 ```
 
 ---
@@ -63,7 +63,7 @@ Every file has exactly this root element. Style is set only on the root. Child e
 </svg>
 ```
 
-- Save it as `icons/<name>.svg`, using a lowercase kebab-case singular noun (`skeleton-key`, `hand-mirror`).
+- Save it as `icons/<name>.svg`, using a lowercase kebab-case singular noun (`soda-can`, `hand-mirror`).
 - Allowed elements: `path`, `circle`, `ellipse`, `line`, `polyline`. Allowed child attributes: geometry only (`d`, `cx`, `cy`, `r`, `rx`, `ry`, `x1`…, `points`) plus `transform="rotate(…)"`.
 - No fills, no `<rect>`, no `<polygon>`, and no `Z`/`z` in paths (see §3). `npm run check` enforces all of this.
 
@@ -71,34 +71,35 @@ Every file has exactly this root element. Style is set only on the root. Child e
 
 - **Safe area:** keep the painted stroke inside 1 → 14. Path coordinates should therefore stay within **1.5 → 13.5**. The check script warns when an icon enters the 1 px margin and fails when it leaves the canvas.
 - **Put straight lines on half coordinates.** A 1 px stroke centred on `x = 4.5` fills exactly one pixel column. Centred on `x = 4` it smears across two grey columns. Every horizontal and vertical segment should sit on `.5` (for example `M4.5 1.5V13.5`).
-- **Circles:** use a `.5` centre with a whole-number radius (`cx=7.5 r=6`) so the top, bottom and side extremes land on whole pixels. The canvas centre is `7.5, 7.5`, and the largest round icon uses `r=6` (compass, eyeball).
+- **Circles:** use a `.5` centre with a whole-number radius (`cx=7.5 r=6`) so the top, bottom and side extremes land on whole pixels. The canvas centre is `7.5, 7.5`, and the largest round icon uses `r=6` (clock, globe, button).
 - **Keep parallel strokes 2 units apart** centre to centre, which leaves a 1 px gap. At 1.5 apart they merge into a grey bar at 15 px. This applies to tube outlines (bone shaft, hand-mirror handle, cactus arms, paperclip loops), ladder rungs and tornado bands.
-- Diagonals and curves will always be anti-aliased at 15 px, and that is fine. Where the object allows it, build the main structure from crisp verticals and horizontals: ladder, candle, gravestone, cactus, trapdoor and envelope all do this, and they are the sharpest icons at 15 px.
+- Diagonals and curves will always be anti-aliased at 15 px, and that is fine. Where the object allows it, build the main structure from crisp verticals and horizontals: ladder, candle, gravestone, cactus, comb, door and envelope all do this, and they are the sharpest icons at 15 px.
 
 ### 3. Rendering quirk: avoid `Z`
 
 In Chromium, at 1×, a subpath closed with `Z` (and any `<rect>`) gets a faint one-pixel halo along the closing edge. Open paths do not get it. `stroke-linecap="round"` makes the seam invisible, so:
 
 - **Close shapes by ending the path on its start point**, without `Z`: `M7.5 6.5H9.5V13.5H5.5V6.5H7.5`.
-- **Start closed outlines partway along a straight edge** rather than at a corner (`M7.5 11.5H2.5…` for the bell). This gave the cleanest result.
+- **Start closed outlines partway along a straight edge** rather than at a corner (`M7.5 7.5H1.5…` for the mushroom cap). This gave the cleanest result.
 - Write rectangles as paths in the same way.
 
 ### 4. Dots
 
-To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders as a 1-unit dot. It is used for eyes, mushroom spots, thimble dimples and tentacle suckers. Use it sparingly, because at 15 px a dot is a single pixel.
+To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders as a 1-unit dot. It is used for eyes, mushroom spots, button holes and tentacle suckers. Use it sparingly, because at 15 px a dot is a single pixel.
 
 ### 5. Design principles
 
 - **The silhouette must identify the object at 15 px.** Interior details are mainly for 30 px and up. Use about 1–7 elements and at most about three interior details. If removing a detail makes no difference at 15 px, remove it.
 - **Use flat, front or side views.** Perspective and three-quarter views did not read at this size.
-- **Use outlines (a 2-unit-wide tube) for parts with mass**, such as handles, arms, bones and worms. Use a single stroke for thin things such as stems, strings, antennae, needles and blades.
+- **Use outlines (a 2-unit-wide tube) for parts with mass**, such as handles, arms, bones and worms. Use a single stroke for thin things such as stems, strings, antennae, spars and blades.
 - **Keep a consistent optical size.** Most icons fill about 12 units on their longer axis (1.5 → 13.5). Narrow objects (candle, hand mirror, paperclip) still use the full height.
 - **Prefer computed geometry to guessed curves.** Building from circles and arcs whose intersections you calculate gave cleaner results than freehand Béziers:
   - moon: a circle minus an offset circle, using the two intersection points
   - cloud: three arcs meeting at shared points
   - bone: two overlapping knob circles at each end
   - worm: concentric arcs with r = 1.25 and 3.25 around the same centres
-  - snail: semicircles whose radius grows by 1 each half-turn
+  - snail: semicircles whose radius grows by 1 each half-turn, with the last quarter-turn landing exactly on the foot line so the shell sits on the body
+  - pineapple, sun: crosshatch chords and ray endpoints computed from the ellipse/circle equations
   - A short Python or JS snippet is enough to find circle intersections.
 - **Arc flags:** SVG's y-axis points down, so `sweep-flag=1` means clockwise on screen. If an arc bulges the wrong way, flip the sweep flag. If it takes the long way round, flip the large-arc flag.
 - **Be careful with round caps near the edge.** A cap extends 0.5 past the endpoint, so a stroke ending at `y=1` paints up to `0.5`.
@@ -107,14 +108,24 @@ To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders a
 
 | Problem | What failed | What worked |
 |---|---|---|
-| Eyeball read as a target or radio button | Two concentric circles; small vein ticks (looked like claws) | Outer circle plus an offset **ellipse** iris and a pupil dot, so the eye is looking sideways |
+| Eyeball was not recognised as an eye | Sphere with an offset elliptical iris (read as a target, a fish or a radio button; rejected in review) | **Almond eye** outline with a round iris and a pupil dot |
 | Moth read as a butterfly | Four separate upright wings | Two swept-back **delta** wings, as a moth holds them at rest, plus curled antennae |
-| Trapdoor was unreadable | Cross-section with ladder; three-quarter hatch (looked like a book or folder) | Top-down **hatch**: square frame, two plank lines, hinge stubs and a ring pull |
+| Hammer read as a T or a ray gun | Long wedge head with a separate face line | A square **striking face** on one side, a thin neck and a **curved claw** on the other, all one outline with the handle |
+| Axe read as a megaphone | Blade drawn with straight edges converging on the handle | **Concave** top and bottom edges (a bearded blade) with a convex cutting edge |
+| Whistle read as a "9" or a snail | Short mouthpiece on a large round chamber | **Long flat mouthpiece** tangent to a smaller chamber, plus a pea and an air slot |
+| Shell (conch) read as a leaf, acorn or shield | Symmetric upright cone; plain diagonal teardrop | Diagonal shell with a **stepped spire** at the top right and a wide aperture lip sweeping to the canal at the bottom left |
+| Teapot spout looked like a stick | Single-stroke spout | An **outlined**, tapering spout with an open tip, like the other parts that have mass |
+| Snail shell looked like it was floating | Spiral drawn as a separate circle above the foot | The spiral's last arc **ends on the foot line**, so the shell and body share a point |
+| Lighthouse rays looked like part of the building | Two rays touching the lamp room | Three short rays per side with a **gap** between them and the tower |
+| Zipper read as a stick figure | Teeth only above the slider, with the tapes splaying out below | Teeth above and below a **square slider**, with the pull tab sticking out to the side |
 | Tornado read as an "align" or menu icon | Straight horizontal bars | The same bars, **slightly curved** and staggered |
 | Wishbone read as a caret (^) | Single stroke with a knob | **Outlined** tube shape with a rounded apex |
 | Antler read as a twig | Single antler | A **pair** of antlers |
 | Worm was muddy at 15 px | Diagonal tube | Horizontal S-curve built from concentric arcs, with a band line near the head |
-| Shell base turned into a black blob | Ribs that all converged at one point | Fewer ribs that stop at a flat hinge line |
+| Pineapple and igloo turned into grey blobs | Dense crosshatch or brick courses spaced under 2 units | Two crosshatch lines per direction, **4 units** apart; one brick course with two joints |
+| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor | — (don't re-add them without asking) |
+
+If an icon fails review twice, look at how established icon sets draw the same object. The `@iconify-json/*` packages on npm are an easy source of reference silhouettes. Use them only to understand the shape, and draw your own version on this grid.
 
 ### 7. Workflow checklist
 
