@@ -152,7 +152,11 @@ To draw a dot, use a zero-length subpath: `M6 6h0`. With round caps it renders a
 | Nest looked geometric | A smooth bowl with two crossing lines | Overlapping straight **sticks** at different angles, with ends poking past the outline |
 | Caltrop was too thin, then read as a plane or arrowhead | Thin spikes; a star polygon | Four wide cones that **overlap** at the centre |
 | Accidental symbols | Triangle plus circle (an eye of providence); crossbars on masts (crucifixes); a cloud on a tower (mushroom cloud) | Check every new icon for unintended symbols, and change the motif if one appears |
-| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb, crucible, pitcher-plant, seed-pod, shell, sundial, spindle, bagpipe, barnacle, retort-flask, bullroarer, ocarina, shoe | — (don't re-add them without asking) |
+| Möbius strip looked like a wireframe | Two offset figure-eights; a lemniscate band | One edge traced around an oval twice, with the band width set to `W·cos(φ)`. φ turns through π in a narrow front sector, which gives a single half-twist. Hide a short gap where the second pass crosses, so the band reads as **solid** |
+| Thick double lines read as solid bars | Column plinth and rotunda base made of two lines 1 unit apart | A plain 2-unit **rectangle**, or a mirror of another detail (column base = capital flipped) |
+| Aqueduct parts merged together | Arches touching the frame and the beams | Free-standing arch openings with **≥1.5 units** between tiers and between arches, and every leg on a `.5` x-coordinate |
+| Tree too geometric | Smooth oval or cloud canopy | A **lumpy** canopy (12 points with varied radii, smoothed), a flared trunk and one side branch below the canopy |
+| Removed by the owner after review | compass, needle, bell, doorknob, thimble, trapdoor, pillow, kite, saw, hammer, door, comb, crucible, pitcher-plant, seed-pod, shell, sundial, spindle, bagpipe, barnacle, retort-flask, bullroarer, ocarina, shoe, airlock, menhir, oil-lamp, rune-stone, wasp-nest, solar-sail | — (don't re-add them without asking) |
 
 If an icon fails review twice, look at how established icon sets draw the same object. The `@iconify-json/*` packages on npm are an easy source of reference silhouettes. Use them only to understand the shape, and draw your own version on this grid.
 
